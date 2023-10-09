@@ -125,14 +125,14 @@ class JSONLDImporter(LCIImporter):
                 + [obj.get("category", {}).get("name")]
                 + [obj["name"]]
             )
-            for obj in data["categories"].values()
+            for obj in data["category"].values() # changed this
         }
 
         return [
             {
                 "code": obj["@id"],
                 "name": obj["name"],
-                "categories": category_mapping[obj["category"]["@id"]],
+                "category": category_mapping[obj["category"]["@id"]],
                 "CAS number": obj.get("cas"),
                 "database": database_name + suffix,
                 "exchanges": [],
@@ -160,7 +160,7 @@ class JSONLDImporter(LCIImporter):
             {
                 "code": obj["@id"],
                 "name": obj["name"],
-                "categories": category_mapping[obj["category"]["@id"]],
+                "categories": category_mapping[obj["category"]["@id"]], # changed to category
                 "location": obj["location"]["name"] if "location" in obj else None,
                 "exchanges": [],
                 "unit": "",
